@@ -1,0 +1,3055 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   1. リセット・基本設定
+   ========================================================================== */
+
+/* z-index トークン（§5.7 準拠・同じ数値で定義し直書きを置換） */
+:root {
+  --z-below-base: -1;
+  --z-base: 0;
+  --z-above-base: 1;
+  --z-sticky: 10;
+  --z-layer-20: 20;
+  --z-dropdown: 100;
+  --z-layer-999: 999;
+  --z-layer-1000: 1000;
+  --z-layer-5500: 5500;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+textarea {
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 16px;
+  color: var(--css_baseTextColor);
+  line-height: 1.6em;
+  background: var(--white);
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   2. リンクスタイル
+   ========================================================================== */
+
+a:link,
+a:visited {
+  color: var(--css_invertedTextColor) !important;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: none;
+  opacity: 0.6;
+  transition: 0.7s;
+}
+
+a img {
+  border: none;
+}
+
+a:hover img {
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   3. レイアウト・ユーティリティ
+   ========================================================================== */
+
+.wrapper {
+  overflow: hidden;
+}
+
+.wrap {
+  padding: 80px 0;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  background: var(--white);
+  position: relative;
+}
+
+.wrap_inner {
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: auto;
+  padding: 0;
+}
+
+.btn .wrap_inner {
+  max-width: 1000px;
+  width: 80%;
+}
+
+.floatLeft {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.clearfix {
+  display: block;
+}
+
+.anchor {
+  padding-top: 180px;
+  margin-top: -180px;
+}
+
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ==========================================================================
+   4. タイポグラフィ
+   ========================================================================== */
+
+h1 {
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  font-size: 49px;
+  line-height: 1.3em;
+  font-weight: 700;
+  margin: 0 auto 50px;
+  position: relative;
+  padding: 0.5rem 0 2rem;
+}
+
+h2 span:first-of-type {
+  color: var(--css_themeColor);
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 25px;
+  color: var(--css_baseTextColor);
+  margin: 30px auto 10px;
+  text-align: left;
+}
+
+span.uLine {
+  background: linear-gradient(transparent 60%, var(--css_fvHighlightColor) 30%);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   5. アニメーション
+   ========================================================================== */
+
+.fadein {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.fadein.animation-ready {
+  opacity: 0.1;
+  transform: translate(0, 50px);
+  transition: all 500ms;
+}
+
+.fadein.animation-ready.scrollin {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.01;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   6. ヘッダー
+   ========================================================================== */
+
+/* 新ヘッダー: 単一 DOM + Grid 1 行（ロゴ | ナビ | TEL+CTA） */
+.siteHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: var(--z-layer-1000);
+  width: 100%;
+  height: 78px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--white);
+}
+
+.siteHeader.fixed {
+  position: fixed;
+  z-index: var(--z-layer-1000);
+}
+
+.siteHeader__logo {
+  display: flex;
+  align-items: center;
+  padding: 6px 0 6px 17px;
+}
+
+.siteHeader__logo img {
+  height: 66px;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+}
+
+.siteHeader__logoText {
+  display: flex;
+  align-items: center;
+  padding: 6px 0 6px 17px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--css_baseTextColor, #333);
+  text-decoration: none;
+}
+
+.siteHeader__nav {
+  display: flex;
+  gap: 0;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.siteHeader__nav a {
+  padding: 0 10px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  color: var(--css_baseTextColor) !important;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.siteHeader__right {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-height: 78px;
+  padding-right: 0;
+}
+
+.siteHeader__right .siteHeader__tel {
+  margin: 0 20px 0 0;
+  text-align: right;
+  font-size: 14px !important;
+  align-self: center;
+}
+
+.siteHeader__right .siteHeader__tel a {
+  color: var(--css_baseTextColor) !important;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* 営業時間・電話番号が両方空のときは連絡先ブロックごと非表示 */
+.siteHeader__tel:empty {
+  display: none;
+}
+
+/* 電話番号が空のときはリンク（アイコン含む）ごと非表示（PHPでブロック削除されなかった場合の保険） */
+.siteHeader__tel a[href="tel:"],
+.siteHeader__tel a[href="tel: "],
+.siteHeader__tel a:has(span[data-field="header_tel"]:empty) {
+  display: none;
+}
+
+.siteHeader__right a.dlBtn,
+.siteHeader__right a.hCtnBtn {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  height: 78px;
+  min-height: 78px;
+  width: 156px;
+  color: var(--css_invertedTextColor);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.siteHeader__right a.dlBtn {
+  background: var(--css_themeColor);
+}
+
+.siteHeader__right a.hCtnBtn {
+  background: var(--css_ctaButtonColor);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.siteHeader__right .cta-ico {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+}
+
+/* グローバルメニューCTA文言。16px固定。文字数制限で制御するため不自然な折り返しを避ける（word-break: keep-all）。… は出さず overflow: visible。 */
+.siteHeader__right .cta-txt {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+  display: block;
+  max-height: 2.4em;
+  min-width: 0;
+  text-align: center;
+  overflow: visible;
+  box-sizing: border-box;
+  word-break: keep-all;
+}
+
+/* ハンバーガーボタン（PC・TBでは非表示） */
+.siteHeader__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--css_baseTextColor);
+  cursor: pointer;
+  font-size: 1.25rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.siteHeader__hamburger:hover,
+.siteHeader__hamburger:focus-visible {
+  opacity: 0.8;
+}
+
+/* SP用の電話・CTAブロック（PC・TBでは非表示） */
+.siteHeader__nav-sp-extra {
+  display: none;
+}
+
+/* TB: ナビ非表示・TEL+CTA を右寄せ */
+@media only screen and (min-width: 768px) and (max-width: 1180px) {
+  .siteHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .siteHeader__nav {
+    display: none;
+  }
+
+  .siteHeader__right {
+    margin-left: auto;
+  }
+}
+
+/* SP: ヘッダー縮小・ハンバーガーメニュー（ロゴ＋ハンバーガーのみ、電話・CTAはメニュー内） */
+@media screen and (max-width: 768px) {
+  .siteHeader {
+    height: auto;
+    min-height: 70px;
+    padding: 0 0 0 10px;
+    gap: 0;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .siteHeader__logo {
+    padding: 5px 0 5px 10px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .siteHeader__logo img {
+    height: 56px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+  }
+
+  .siteHeader__logoText {
+    padding: 5px 0 5px 10px;
+    font-size: 1.1rem;
+  }
+
+  .siteHeader__hamburger {
+    display: flex;
+    justify-self: end;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    margin-right: 4px;
+    font-size: 1.75rem;
+    color: var(--css_baseTextColor);
+  }
+
+  .siteHeader__right {
+    display: none;
+  }
+
+  /* ナビ: 通常時は非表示、開いた時はオーバーレイパネル（リンク＋電話・CTA） */
+  .siteHeader__nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: var(--z-layer-999);
+    padding: 0;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .siteHeader.is-open .siteHeader__nav {
+    display: flex;
+  }
+
+  .siteHeader__nav > a {
+    height: auto;
+    min-height: 48px;
+    padding: 14px 16px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--borderLight);
+    justify-content: flex-start;
+  }
+
+  .siteHeader__nav > a:last-of-type {
+    border-bottom: 1px solid var(--borderLight);
+  }
+
+  .siteHeader__nav-sp-extra {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px 16px;
+    gap: 12px;
+    border-bottom: none;
+  }
+
+  .siteHeader__nav-sp-extra .siteHeader__tel {
+    margin: 0;
+    font-size: 14px !important;
+    text-align: left;
+  }
+
+  .siteHeader__nav-sp-extra .siteHeader__tel a {
+    font-size: 18px;
+  }
+
+  .siteHeader__nav-sp-extra a.dlBtn,
+  .siteHeader__nav-sp-extra a.hCtnBtn {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 6px;
+    margin: 0;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* SP用CTA文言。16px固定。word-break: keep-all 維持。 */
+  .siteHeader__nav-sp-extra .cta-txt {
+    font-size: 16px;
+    max-height: 2.4em;
+    overflow: visible;
+    word-break: keep-all;
+  }
+}
+
+/* ==========================================================================
+   7. ヒーローセクション
+   ========================================================================== */
+
+.fv {
+  width: 100%;
+  height: auto;
+  background: linear-gradient(to right, var(--white), var(--css_themeColor));
+  position: relative;
+  padding-left: 5%;
+  padding-right: 5%;
+  box-sizing: border-box;
+}
+
+.fv-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-below-base);
+  width: 100%;
+  height: 100%;
+}
+
+.fv-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ヒーロー2ブロック目: アイキャッチ画像（.fv 直下・任意設定）
+   画面幅 768px 以下（スマホ等）のみ表示。PC 幅ではヒーロー画像が主ビジュアルのため出さない */
+.fv-eyecatch {
+  display: none;
+  width: 100%;
+}
+
+/* アイキャッチ未設定（サーバー/JS が付与）。セクション可視の u-section-hidden とは独立 */
+.fv-eyecatch.u-eyecatch-empty {
+  display: none !important;
+}
+
+.fv-eyecatch img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .fv-eyecatch {
+    display: block;
+  }
+}
+
+.fvWrap {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1150px;
+  padding: 0;
+  margin: 0 auto;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+.fvWrap__body {
+  flex: 0 1 70%;
+  max-width: 70%;
+  min-width: 0;
+}
+
+/* キャッチコピー（吹き出し・メイン・サブを一括定義） */
+.fvWrap p.subCatchcopy {
+  background-color: var(--css_lightColor);
+  margin: 0;
+  padding: 10px;
+  font-size: clamp(18px, calc(100vw * 18 / 769), 26px);
+  font-weight: 700;
+  margin: 10px 0 0;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+.fvWrap p.upperCatchcopy {
+  display: inline-block;
+  background-color: var(--css_lightColor);
+  color: var(--css_baseTextColor);
+  padding: 0.2em 0.5em;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  margin: 5px 0;
+  font-size: clamp(22px, calc(100vw * 22 / 769), 32px);
+  font-weight: 700;
+}
+
+.fvWrap .catchcopy {
+  font-size: clamp(26px, calc(100vw * 26 / 769), 44px);
+  font-weight: 900;
+  line-height: 1.3em;
+  background-color: var(--css_lightColor);
+  margin: 5px 0;
+  padding: 10px 0 20px;
+  text-align: center;
+}
+
+/* 背景を「行いっぱい」にせず文字の高さ＋余白に収める（垢抜けた見た目） */
+.fvWrap .catchcopy span.blueBack {
+  font-size: inherit;
+  display: inline-block;
+  line-height: 1.15;
+  padding: 0.12em 0.28em;
+  background: var(--css_themeColor);
+  color: var(--css_invertedTextColor);
+}
+
+.fvWrap .catchcopy span.underline {
+  font-size: inherit;
+  letter-spacing: 0.1em;
+  display: inline;
+  line-height: 1.15;
+  padding: 0 0.05em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.fvWrap span.underline {
+  background: linear-gradient(transparent 60%, var(--css_fvHighlightColor) 30%);
+  display: inline;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.fvWrap p {
+  font-size: clamp(14px, calc(100vw * 14 / 769), 22px);
+  margin: 20px 0 0;
+  line-height: 1.5em;
+}
+
+.fvWrap img {
+  width: 100%;
+  height: auto;
+}
+
+/* 3ポイントタグ */
+.fv .textList {
+  width: 100%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+}
+
+.fv .textList .tag {
+  background: var(--css_deepColor);
+  color: var(--css_invertedTextColor);
+  margin: 5px;
+  padding: 0.2em 4em;
+  font-size: min(1.7vw, 20px);
+  font-weight: bold;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 20px 100%);
+  white-space: normal;
+  text-align: left;
+  width: 100%;
+}
+
+.fv .textList .tag.narrow {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+.fv .textList .tag .item {
+  width: 0.8em;
+  height: 0.8em;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  margin-left: -1.5em;
+  display: inline-block;
+}
+
+/* 3ポイント内の黄色文字（AI生成の fvPointLine 用・下線ではなく文字色） */
+.fv .textList .tag span.fvPointLine {
+  color: var(--css_fvHighlightColor);
+  display: inline;
+}
+
+.fv .highlight {
+  color: var(--css_fvHighlightColor);
+}
+
+/* ==========================================================================
+   8. モーダル
+   ========================================================================== */
+
+.modal-wrapper {
+  z-index: var(--z-layer-999);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 40px 10px;
+  text-align: center;
+}
+
+.modal-wrapper:not(:target) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-wrapper:target {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.modal-wrapper::after {
+  display: inline-block;
+  height: 100%;
+  margin-left: -0.05em;
+  vertical-align: middle;
+  content: "";
+}
+
+.modal-wrapper .modal-window {
+  box-sizing: border-box;
+  display: inline-block;
+  z-index: var(--z-layer-20);
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  padding: 90px 0 0;
+  box-shadow: 0 0 30px var(--overlayDark);
+  vertical-align: middle;
+}
+
+.modal-wrapper .modal-window .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.modal-overlay {
+  z-index: var(--z-sticky);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--overlayDark);
+}
+
+.modal-wrapper .modal-close {
+  z-index: var(--z-layer-20);
+  position: absolute;
+  top: 50px;
+  right: 5px;
+  width: 35px;
+  color: var(--mediumGray) !important;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.modal-wrapper .modal-close:hover {
+  color: var(--css_baseTextColor) !important;
+}
+
+/* ==========================================================================
+   9. 各セクション
+   ========================================================================== */
+
+/* Problem */
+.problem {
+  background: var(--css_lightColor);
+}
+
+.problem h2 {
+  color: var(--css_themeColor);
+  padding: 10px;
+  text-align: center;
+  border-radius: 35px;
+  margin: 0 auto 20px;
+  font-weight: 700;
+}
+
+.problem__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.problem__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.problem__media {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.problem__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.problem__body {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* 問題タイトル: 2行想定で高さ固定・縦中央揃え・3項目同一高さ */
+.problem__body h3 {
+  font-size: 24px;
+  text-align: center;
+  line-height: 1.4em;
+  margin-bottom: 20px;
+  height: 2.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.problem__body h3 .problem__title-inner {
+  width: 100%;
+  min-width: 0;
+}
+
+.problem__body p {
+  font-size: 17px;
+  line-height: 1.4em;
+  text-align: center;
+}
+
+.problem .image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.problem .image-grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.problem .problem__arrow {
+  background: var(--css_themeColor);
+  height: calc(tan(60deg) * 60px / 3);
+  width: 300px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  margin: 30px auto;
+  clear: both;
+}
+
+.problem .problem__result {
+  font-size: 34px;
+  text-align: center;
+  line-height: 1.6em;
+  font-weight: 700;
+}
+
+/* Solution */
+.solution {
+  background: var(--white);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.solution__list {
+  width: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+.solution__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto 50px;
+  background: var(--white);
+  gap: 24px;
+}
+
+.solution__item--reverse {
+  flex-direction: row-reverse;
+}
+
+.solution__media {
+  flex: 0 0 30%;
+  min-width: 0;
+}
+
+.solution__media img.pho {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.solution__body {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+}
+
+.solution__body h3 {
+  color: var(--css_themeColor);
+  font-size: 30px;
+  margin: 0 auto 20px;
+  line-height: 1.8em;
+  font-weight: 700;
+}
+
+.solution__body p {
+  font-size: 18px;
+  margin: 0 auto;
+  line-height: 1.8em;
+}
+
+/* その他メリット（.other_benefit）内の .otherPoint。lp_base では .solution > .wrap_inner > .other_benefit のため .solution .otherPoint でも一致する */
+.solution .otherPoint,
+.other_benefit .otherPoint {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+  background: var(--css_lightColor);
+  border-radius: 20px;
+}
+
+.solution .otherPoint table,
+.other_benefit .otherPoint table {
+  font-size: 24px;
+  font-weight: 700;
+  table-layout: auto;
+}
+
+.solution .otherPoint table th,
+.other_benefit .otherPoint table th {
+  width: 10%;
+  padding: 15px 0;
+  vertical-align: middle;
+  line-height: 1.5em;
+}
+
+.solution .otherPoint table td,
+.other_benefit .otherPoint table td {
+  width: 90%;
+  padding: 15px 0;
+  vertical-align: middle;
+  line-height: 1.5em;
+}
+
+.solution .otherPoint table th i,
+.other_benefit .otherPoint table th i {
+  color: var(--css_accentColor);
+  font-size: 26px;
+}
+
+/* Merit */
+.merit {
+  background: var(--css_subBackgroundColor);
+}
+
+.merit__hero {
+  width: 100%;
+  margin: 0 auto 50px;
+}
+
+.merit__hero table {
+  width: 100%;
+  margin: 0;
+}
+
+.merit__hero table th {
+  width: 30%;
+}
+
+.merit__hero table th img {
+  width: 100%;
+  height: auto;
+}
+
+.merit__hero table td {
+  width: 70%;
+  padding-left: 20px;
+}
+
+.merit__hero table td h2 {
+  font-size: 35px;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.merit__hero table td .intro {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.4em;
+  margin: 0 auto 30px;
+}
+
+.merit__hero table td .intro span {
+  color: var(--css_accentColor);
+}
+
+.merit__list {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.merit__item {
+  flex: 1 1 calc((100% - 2rem) / 3);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--white);
+  padding: 30px 20px;
+  margin: 0;
+  border-radius: 20px;
+  box-shadow: 0 0 8px var(--borderLight);
+  box-sizing: border-box;
+}
+
+.merit__media {
+  margin-bottom: 16px;
+}
+
+.merit__media img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.merit__body h3 {
+  text-align: center;
+  color: var(--css_themeColor);
+  font-size: 23px;
+  line-height: 1.5em;
+}
+
+.merit__body p {
+  font-size: 15px;
+  text-align: left;
+}
+
+/* Reason */
+.reason {
+  background: var(--css_lightColor);
+}
+
+.reason__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reason__item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto 30px;
+  background: var(--white);
+  gap: 24px;
+}
+
+.reason__num {
+  flex: 0 0 160px;
+  background: var(--css_themeColor);
+  color: var(--css_invertedTextColor);
+  text-align: center;
+  padding-top: 50px;
+  font-size: 26px;
+  line-height: 2.3em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.reason__num span {
+  font-size: 90px;
+}
+
+.reason__body {
+  flex: 1;
+  min-width: 0;
+  max-width: 450px;
+  padding: 20px;
+}
+
+.reason__body h3 {
+  font-size: 22px;
+  line-height: 1.5em;
+  margin: 15px auto;
+}
+
+.reason__body p {
+  font-size: 15px;
+  line-height: 1.6em;
+}
+
+.reason__media {
+  flex: 0 0 315px;
+  min-width: 0;
+  padding: 20px;
+}
+
+.reason__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Use */
+.use {
+  background: none;
+}
+
+.use.scrollin {
+  background: url("./images/templates-images/lp_base/7-useBg.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.use p {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px auto;
+  color: var(--css_invertedTextColor);
+  line-height: 1.8em;
+  font-weight: 700;
+}
+
+.use p.genre {
+  text-align: left;
+  background: var(--white);
+  color: var(--css_baseTextColor);
+  font-size: 20px;
+  padding: 30px 50px;
+  width: 80%;
+  margin: 20px auto;
+  font-weight: 300;
+}
+
+/* Performance */
+.performance {
+  background: var(--css_subBackgroundColor);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.performance table {
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 0 8px var(--borderLight);
+  margin: 0 auto 50px;
+}
+
+.performance table th {
+  width: 30%;
+  vertical-align: middle;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.performance table th img {
+  width: 230px;
+  height: auto;
+}
+
+.performance table td {
+  width: 700px;
+  padding: 30px 30px 30px 0;
+}
+
+.performance table td h3 {
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.6em;
+}
+
+.performance table td .name {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px auto;
+}
+
+.performance table td p {
+  line-height: 1.8em;
+}
+
+/* Price */
+.price_f table {
+  width: 100%;
+  margin: 0 auto;
+  background: var(--css_subBackgroundColor);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.price_f table th,
+.price_f table td {
+  width: 33%;
+  text-align: center;
+  vertical-align: top;
+  border: none;
+}
+
+.price_f table th {
+  padding: 10px 0 0;
+}
+
+.price_f table td {
+  padding: 5px 10px;
+  line-height: 1.9em;
+}
+
+.price_f table th.osusume,
+.price_f table td.osusume {
+  box-shadow: 5px 0 0 0 var(--css_accentColor) inset,
+    -5px 0 0 0 var(--css_accentColor) inset;
+  position: relative;
+  background-color: color-mix(in srgb, var(--css_accentColor) 10%, transparent);
+}
+
+.price_f table th.osusume::before {
+  content: "";
+  width: 100%;
+  height: 25px;
+  position: absolute;
+  background-color: color-mix(in srgb, var(--css_accentColor) 10%, transparent);
+  left: 0;
+  top: -25px;
+  border: 5px solid var(--css_accentColor);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: none;
+}
+
+.price_f table tr.end td.osusume::after {
+  content: "";
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  background-color: color-mix(in srgb, var(--css_accentColor) 10%, transparent);
+  left: 0;
+  bottom: -20px;
+  border: 5px solid var(--css_accentColor);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top: none;
+}
+
+.price_f table tr.end td {
+  padding-bottom: 10px;
+}
+
+.price_f table th.osusume .osusumeIcon {
+  width: max-content;
+  color: var(--css_accentColor);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.3em 1em;
+  background: var(--white);
+  border: 4px solid var(--css_accentColor);
+  border-radius: 100vh;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.price_f table th h3 {
+  color: var(--css_themeColor);
+  font-size: 26px;
+  text-align: center;
+  line-height: 1.6em;
+  margin-top: 0;
+}
+
+.price_f table th p,
+.price_f table td p {
+  font-size: 16px;
+  line-height: 1.6em;
+  padding: 0 6px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.price_f table th p span,
+.price_f table td p.price-txt {
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.price_f table th.osusume h3 {
+  color: var(--css_themeColor);
+}
+
+.price_f table th.osusume p {
+  color: var(--css_invertedTextColor);
+}
+
+.price_f table td.addTxt {
+  background: var(--white);
+  font-size: 16px;
+  padding: 30px 0 10px;
+  text-align: center;
+}
+
+.price_f table td.addOption {
+  padding: 30px;
+  background: var(--css_subBackgroundColor);
+}
+
+/* 比較表 */
+.price_s {
+  background: var(--css_lightColor);
+}
+
+.comparison-table-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 比較表：幅を超える場合は横スクロールで収める（全幅共通）
+ * 2列目（弊社）の thead th::before が上にはみ出すため、上部に余白を設けて囲い線が切れないようにする（casefactory.jp と同様）
+ * 左端の赤ボーダーが overflow で切れないよう左右にパディングを確保する
+ */
+.table-scroll {
+  overflow-x: auto;
+  padding-top: 22px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.priceTbl {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.priceTbl thead th {
+  padding: 1em 0.8em;
+}
+
+.priceTbl thead th:not(:first-child) {
+  background: var(--borderDark);
+  color: var(--css_invertedTextColor);
+  font-size: 20px;
+  padding: 1em 0.5em;
+}
+
+.priceTbl thead th:nth-child(2) {
+  background-color: var(--white);
+  position: relative;
+  border-left: 4px solid var(--css_accentColor);
+  border-right: 4px solid var(--css_accentColor);
+  color: var(--css_accentColor);
+  box-sizing: border-box;
+}
+
+/* left/right + 負の margin で th のボーダー幅とぴったり揃え、サブピクセルずれを防ぐ */
+.priceTbl thead th:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: auto;
+  margin-left: -4px;
+  margin-right: -4px;
+  height: 15px;
+  bottom: 100%;
+  background-color: var(--white);
+  border: 4px solid var(--css_accentColor);
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+}
+
+.priceTbl thead th:nth-child(2) p {
+  display: block;
+  margin: 0;
+  font-weight: bold;
+}
+
+.priceTbl tbody th,
+.priceTbl tbody td {
+  border: none;
+}
+
+.priceTbl tbody th {
+  background-color: var(--css_themeColor);
+  color: var(--css_invertedTextColor);
+  vertical-align: middle;
+}
+
+.priceTbl tbody td {
+  background-color: var(--white);
+  padding: 1em;
+  vertical-align: top;
+}
+
+.priceTbl tbody td span {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.priceTbl tbody td span.d_circle,
+.priceTbl tbody td span.s_circle {
+  color: var(--css_accentColor);
+  font-weight: 900;
+}
+
+.priceTbl tbody td span.triangle {
+  color: var(--css_themeColor);
+  font-weight: 900;
+}
+
+.priceTbl td:nth-child(2) {
+  background: var(--white);
+  border-left: 4px solid var(--css_accentColor);
+  border-right: 4px solid var(--css_accentColor);
+}
+
+.priceTbl tbody tr:last-child td:nth-child(2) {
+  border-bottom: 4px solid var(--css_accentColor) !important;
+}
+
+/* Flow */
+.flow {
+  background: var(--css_subBackgroundColor);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.stepbar {
+  margin: 0 auto;
+  width: 85%;
+}
+
+.stepbar .stepbarwrap {
+  margin: 2em 0;
+  position: relative;
+}
+
+.stepbar .stepbarwrap .steptitle {
+  display: inline-flex;
+  align-items: center;
+}
+
+.stepbar .stepbarwrap .steptitle .stepcircle {
+  display: inline-block;
+  width: 7em;
+  height: 7em;
+  content: "";
+  border-radius: 50%;
+  background-color: var(--css_themeColor);
+  color: var(--css_invertedTextColor);
+  text-align: center;
+  aspect-ratio: 1 / 1;
+}
+
+.stepbar .stepbarwrap .steptitle .stepcircle span {
+  display: inline-block;
+  line-height: 1.6em;
+  font-size: 4em;
+  font-weight: 700;
+  position: relative;
+}
+
+.stepbar .stepbarwrap .steptitle .title {
+  margin: 0.5em;
+  font-weight: 700;
+  font-size: 2em;
+  color: var(--css_themeColor);
+  line-height: 1.2em;
+  width: calc(100% - 4em);
+}
+
+.stepbar .stepbarwrap .steptxt {
+  padding-left: 8em;
+}
+
+.stepbar .stepbarwrap .steptxt .txt {
+  font-size: 1em;
+}
+
+.stepbar .stepbarwrap .stepline {
+  width: 6px;
+  height: calc(100% + 1em);
+  background-color: var(--disabledGray);
+  position: absolute;
+  top: 2em;
+  left: 3.4em;
+  z-index: var(--z-below-base);
+}
+
+.stepbarwrap:last-of-type .stepline:last-of-type {
+  display: none;
+}
+
+/* Q&A */
+.qa {
+  background: var(--css_lightColor);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.qa h2::before {
+  position: absolute;
+  border-bottom: 3px solid gray;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  content: "";
+}
+
+.qa ul {
+  margin: 0 auto 20px;
+  width: 100%;
+}
+
+.qa ul li.q {
+  list-style: none;
+  background: var(--css_themeColor);
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--css_invertedTextColor);
+}
+
+.qa ul li.q span {
+  color: var(--css_invertedTextColor);
+  margin-right: 20px;
+  font-weight: 700;
+}
+
+.qa ul li.a {
+  list-style: none;
+  padding: 20px;
+  color: var(--css_baseTextColor);
+  font-size: 18px;
+  line-height: 1.8em;
+}
+
+.qa ul li.a span {
+  color: var(--css_themeColor);
+  margin-right: 20px;
+  font-weight: 700;
+}
+
+.qa ul li.a [data-field^="qa_"][data-field$="_a"] {
+  color: var(--css_baseTextColor);
+  font-weight: 400;
+}
+
+/* CTA Form */
+.ctaForm {
+  background: var(--css_themeColor);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.ctaForm h2,
+.ctaForm h2 span {
+  color: var(--css_invertedTextColor);
+}
+
+.ctaForm__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.ctaForm__body {
+  flex: 1 1 50%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ctaForm__media img {
+  width: 310px;
+  height: auto;
+  margin: 0 auto 30px;
+  display: block;
+}
+
+.ctaForm__text {
+  max-width: 480px;
+  text-align: left;
+}
+
+.ctaForm__body p {
+  font-size: 20px;
+  line-height: 2em;
+  color: var(--css_invertedTextColor);
+  padding-right: 10px;
+}
+
+.ctaForm__body p span {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.ctaForm__form {
+  flex: 1 1 50%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+
+.ctaForm__form h2 {
+  font-size: 20px;
+  margin: 30px auto 0 !important;
+  padding: 0 !important;
+}
+
+.ctaForm__form p {
+  font-size: 20px;
+  line-height: 2em;
+  color: var(--css_invertedTextColor);
+}
+
+.content_form {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+.content_form p {
+  margin: 0 10px;
+  padding: 0;
+  color: var(--css_invertedTextColor);
+  font-size: 20px;
+  line-height: 2em;
+}
+
+/* フォーム（LP用コンテナ。box-sizing / max-width は form-output.css で共通） */
+#contact-form {
+  background: var(--bgTertiary);
+  border: 1px solid var(--borderLight);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* フォームスタイルは form-output.css に集約（LP/Thanks共通） */
+
+.req {
+  background: var(--css_accentColor);
+  color: var(--css_invertedTextColor);
+  font-size: 13px;
+  padding: 2px 5px;
+}
+
+/* ボタン */
+.ctaBtn {
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  padding: 15px 15px 20px;
+  display: block;
+  margin: 0 auto;
+  line-height: 1.8em;
+  border-radius: 65px;
+  width: auto;
+  background: var(--css_ctaButtonColor);
+  box-shadow: 0 8px 8px var(--shadowLight);
+  transition: all 0.3s ease;
+}
+
+.ctaBtn span {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.ctaBtn span .fa-icon {
+  color: var(--css_fvHighlightColor);
+}
+
+a.btnLink {
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: center;
+  color: var(--css_baseTextColor) !important;
+  padding: 15px 0 0;
+  display: block;
+}
+
+/* 1・2・3つ目CTAブロックのマイクロコピーは中央揃えを維持 */
+.wrap.btn a.btnLink {
+  text-align: center;
+}
+
+/* フローティングバナーではマイクロコピーを非表示 */
+.footer_banner .btnLink {
+  display: none;
+}
+
+/* 送信ボタン・フォーム中身のスタイルは form-output.css に集約 */
+
+/* 運営会社情報 .company-info - solution__list 同様の表示 */
+.company-info {
+  background: var(--white);
+  padding-top: 80px;
+  margin-top: 0;
+}
+
+.company-info__list {
+  width: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+.company-info__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto 50px;
+  background: var(--white);
+  gap: 24px;
+}
+
+.company-info__item--reverse {
+  flex-direction: row-reverse;
+}
+
+.company-info__media {
+  flex: 0 0 30%;
+  min-width: 0;
+}
+
+.company-info__media img.pho {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.company-info__body {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+}
+
+.company-info__body h3 {
+  color: var(--css_themeColor);
+  font-size: 30px;
+  margin: 0 auto 20px;
+  line-height: 1.8em;
+  font-weight: 700;
+}
+
+.company-info__body p {
+  font-size: 18px;
+  margin: 0 auto;
+  line-height: 1.8em;
+}
+
+/* 会社概要 .company-overview */
+.company-overview {
+  background: var(--white);
+}
+
+.company-overview h2 {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.company-overview table {
+  width: 50%;
+  border: none;
+  margin: 0 auto;
+}
+
+.company-overview table th {
+  width: 30%;
+  border-bottom: 1px solid var(--borderGray);
+  padding: 10px 0;
+  text-align: left;
+}
+
+.company-overview table td {
+  width: 70%;
+  border-bottom: 1px solid var(--borderGray);
+  padding: 10px 0;
+}
+
+/* Scene Area */
+.scene {
+  padding-bottom: 0;
+}
+
+.scene .row-1 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.scene .row-1 .col-1,
+.scene .row-1 .col-2 {
+  flex: none;
+  width: auto;
+  padding: 0 10px;
+}
+
+.scene .row-1 h2 {
+  color: var(--css_themeColor);
+  font-size: 25px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.scene .row-1 p {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--css_baseTextColor);
+  margin: 0;
+  text-align: center;
+}
+
+.scene_row {
+  display: flex;
+  margin-bottom: 0;
+}
+
+.scene_col {
+  position: relative;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.scene_col.no01,
+.scene_col.no04 {
+  background-color: var(--bgLightGray);
+}
+
+.scene_col.no02,
+.scene_col.no03 {
+  background-color: var(--bgLightBlue2);
+}
+
+.scene_col .image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.scene_col img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.scene_col .main-heading {
+  font-size: 20px;
+  color: var(--css_baseTextColor);
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.scene_col ul {
+  list-style: none;
+  text-align: left;
+  margin: 30px 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.scene_col li {
+  font-size: 18px;
+  color: var(--css_baseTextColor);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.scene .ib_c-headdig--scesub {
+  position: absolute;
+  top: 190px;
+  margin: 0 auto;
+}
+
+.scene .ib_c-headdig--scesub h3 {
+  background-color: var(--white);
+  width: fit-content;
+  margin: 0;
+  padding: 11px;
+  line-height: 1.3;
+  font-size: min(2.8vw, 20px);
+}
+
+/* ==========================================================================
+   10. フッター
+   ========================================================================== */
+
+.footer_banner {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-dropdown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.6s;
+  background-color: var(--overlayMedium);
+}
+
+.footer_banner .ctaBtn {
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  line-height: 1.8em;
+  border-radius: 65px;
+  width: 80%;
+  max-width: 1000px;
+  background: var(--css_ctaButtonColor);
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+/* フローティングCTA: グローバル a:hover の opacity:0.6 を打ち消す。黒半透明バナー
+   (--overlayMedium) 上で透けると背後の文字と重なり読みづらいため、透過させず明度で
+   ホバー feedback を出す（Ver3 バグ11）。 */
+.footer_banner .ctaBtn:hover,
+.footer_banner .btnLink:hover {
+  opacity: 1;
+}
+.footer_banner .ctaBtn:hover {
+  filter: brightness(1.08);
+}
+
+.footer_banner.hide {
+  bottom: -130px;
+}
+
+.footer {
+  width: 100%;
+  height: auto;
+  color: var(--css_invertedTextColor);
+  background: var(--footerBg);
+  clear: both;
+  margin: 0 auto;
+  padding: 20px 0 140px;
+}
+
+.footer p {
+  color: var(--footerText);
+  font-size: 13px;
+  text-align: center;
+  line-height: 2.3em;
+}
+
+.footer p.sub {
+  font-size: 11px;
+  text-align: center;
+  line-height: 2.3em;
+  margin: 6px auto 0;
+}
+
+.footer a:link,
+.footer a:visited,
+.footer a:hover {
+  color: var(--footerText) !important;
+  text-decoration: underline;
+}
+
+p.pagetop {
+  position: fixed;
+  bottom: 130px;
+  margin-left: 95%;
+  height: 43px;
+  width: 43px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--css_invertedTextColor);
+  z-index: var(--z-layer-5500);
+}
+
+p.pagetop a {
+  width: 43px;
+  height: 43px;
+  display: block;
+}
+
+p.pagetop a img {
+  width: 43px;
+  height: 43px;
+  display: block;
+  transition: 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   11. ユーティリティクラス
+   ========================================================================== */
+
+img.img-radius {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.img-caption {
+  font-weight: 400;
+  font-size: 0.8em;
+}
+
+.content {
+  min-height: calc(100vh - 196px);
+}
+
+/* ==========================================================================
+   12. メディアクエリ - タブレット (768px-1180px)
+   ========================================================================== */
+
+@media only screen and (min-width: 768px) and (max-width: 1180px) {
+  /* タブレット: 新ヘッダー .siteHeader は .siteHeader__nav 非表示で対応済み */
+}
+
+/* ==========================================================================
+   13. メディアクエリ - スマートフォン (max-width: 768px)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  /* レイアウト */
+  .wrap {
+    padding: 40px 0;
+  }
+
+  .wrap_inner {
+    width: 90%;
+  }
+
+  .btn .wrap_inner {
+    width: 90%;
+  }
+
+  .floatLeft,
+  .floatRight {
+    float: none !important;
+    margin: 10px auto;
+  }
+
+  /* タイポグラフィ */
+  h2 {
+    font-size: 30px;
+    margin: 0 auto 10px;
+  }
+
+  h2 span:first-of-type {
+    font-size: 22px;
+  }
+
+  /* ヘッダー: 新ヘッダー .siteHeader は上記 .siteHeader 用 SP ブロックで対応済み */
+
+  /* ヒーロー */
+  .fvWrap {
+    width: 90%;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .fvWrap__body {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .fvWrap p.upperCatchcopy {
+    font-size: clamp(16px, calc(100vw * 16 / 375), 20px);
+    margin: 10px auto 0.5em;
+  }
+
+  .fvWrap .catchcopy {
+    font-size: clamp(22px, calc(100vw * 22 / 375), 28px);
+    font-weight: 900;
+    line-height: 1.4em;
+    text-align: center;
+  }
+
+  .fvWrap p.subCatchcopy {
+    font-size: clamp(14px, calc(100vw * 14 / 375), 18px);
+    font-weight: 700;
+    line-height: 1.5em;
+    text-align: center;
+  }
+
+  .fvWrap p {
+    font-size: clamp(12px, calc(100vw * 12 / 375), 16px);
+    margin: 5px 0 0;
+    line-height: 1.5em;
+    text-align: center;
+  }
+
+  .fvWrap img {
+    width: 65%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .fv .textList .tag {
+    font-size: min(2.8vw, 16px);
+  }
+
+  /* Problem */
+  .problem h2 {
+    width: 100%;
+  }
+
+  .problem__list {
+    flex-direction: column;
+  }
+
+  .problem__item {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .problem__media {
+    flex-basis: auto;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .problem__body {
+    width: 100%;
+    padding: 0;
+  }
+
+  .problem__body p {
+    text-align: center;
+  }
+
+  .problem .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .problem .problem__arrow {
+    width: 200px;
+  }
+
+  .problem .problem__result {
+    font-size: 24px;
+  }
+
+  /* Solution */
+  .solution__item {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+
+  .solution__item--reverse {
+    flex-direction: column;
+  }
+
+  .solution__media {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .solution__media img.pho {
+    width: 100%;
+    margin: 10px auto;
+    padding: 0;
+    display: block;
+  }
+
+  .solution__body {
+    width: 100%;
+  }
+
+  .solution__body h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .solution .otherPoint,
+  .other_benefit .otherPoint {
+    padding: 30px;
+  }
+
+  .solution .otherPoint table,
+  .other_benefit .otherPoint table {
+    font-size: 19px;
+  }
+
+  .solution .otherPoint table th,
+  .other_benefit .otherPoint table th {
+    padding: 10px 0;
+  }
+
+  .solution .otherPoint table td,
+  .other_benefit .otherPoint table td {
+    padding: 10px 0 10px 10px;
+  }
+
+  .solution .otherPoint table th i,
+  .other_benefit .otherPoint table th i {
+    font-size: 25px;
+  }
+
+  /* Company info（solution 同様・モバイルは縦積み） */
+  .company-info__item {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+
+  .company-info__item--reverse {
+    flex-direction: column;
+  }
+
+  .company-info__media {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .company-info__media img.pho {
+    width: 100%;
+    margin: 10px auto;
+    padding: 0;
+    display: block;
+  }
+
+  .company-info__body {
+    width: 100%;
+  }
+
+  .company-info__body h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  /* Merit */
+  .merit__hero table th,
+  .merit__hero table td {
+    width: 100%;
+    display: block;
+  }
+
+  .merit__hero table th img {
+    margin-bottom: 10px;
+  }
+
+  .merit__hero table td {
+    padding-left: 0;
+  }
+
+  .merit__hero table td h2 {
+    font-size: min(5.5vw, 26px);
+    text-align: center;
+  }
+
+  .merit__hero table td .intro {
+    font-size: 18px;
+  }
+
+  .merit__item {
+    flex: 1 1 100%;
+    margin-bottom: 30px;
+  }
+
+  /* Reason（768px以上はflexで横並び、以下は縦積み） */
+  .reason h2 {
+    font-size: 30px;
+  }
+
+  .reason__item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reason__num {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    padding-top: 20px;
+    font-size: 16px;
+    line-height: 1.6em;
+    font-weight: 700;
+  }
+
+  .reason__num span {
+    font-size: 30px;
+  }
+
+  .reason__body {
+    max-width: 100%;
+    margin-top: 16px;
+  }
+
+  .reason__body h3 {
+    text-align: center;
+  }
+
+  .reason__media {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  /* Use */
+  .use.scrollin {
+    background: url("./images/templates-images/lp_base/7-useBg_sp.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .use p {
+    font-size: 21px;
+  }
+
+  .use p.genre {
+    font-size: 16px;
+    padding: 20px;
+    width: 90%;
+  }
+
+  /* Performance */
+  .performance table th,
+  .performance table td {
+    width: 100%;
+    display: block;
+  }
+
+  .performance table th {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+
+  .performance table th img {
+    width: 180px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .performance table td {
+    padding: 10px 30px 30px;
+  }
+
+  .performance table td h3 {
+    line-height: 1.5em;
+  }
+
+  /* Price */
+  .price_f table {
+    margin: 30px auto 0;
+  }
+
+  .price_f table th {
+    padding: 0;
+  }
+
+  .price_f table th.osusume,
+  .price_f table td.osusume {
+    box-shadow: 4px 0 0 0 var(--css_accentColor) inset,
+      -4px 0 0 0 var(--css_accentColor) inset;
+  }
+
+  .price_f table th.osusume::before {
+    border: 4px solid var(--css_accentColor);
+    border-bottom: none;
+  }
+
+  .price_f table tr.end td.osusume::after {
+    border: 4px solid var(--css_accentColor);
+    border-top: none;
+  }
+
+  .price_f table th.osusume .osusumeIcon {
+    font-size: 16px;
+    padding: 0.1em 0.6em;
+    border: 3px solid var(--css_accentColor);
+    top: -46px;
+  }
+
+  .price_f table th h3 {
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 0 8px;
+  }
+
+  .price_f table th p,
+  .price_f table td p {
+    font-size: 12px;
+    margin: 3px 0;
+    padding: 0 8px;
+  }
+
+  .price_f table th p span,
+  .price_f table td p.price-txt {
+    font-size: 17px;
+  }
+
+  .price_f table td {
+    padding: 5px 8px;
+  }
+
+  /* 比較表 */
+  .priceTbl {
+    min-width: 560px;
+  }
+
+  .priceTbl th:first-child,
+  .priceTbl td:first-child {
+    min-width: 90px;
+  }
+
+  .priceTbl thead th:not(:first-child) {
+    font-size: 18px;
+  }
+
+  .priceTbl thead th:nth-child(2) {
+    color: var(--css_baseTextColor);
+    background-color: var(--css_subBackgroundColor);
+    border-top: 4px solid var(--css_accentColor) !important;
+    border-left: 4px solid var(--css_accentColor);
+  }
+
+  .priceTbl thead th:nth-child(2)::before {
+    height: 20px;
+    bottom: 94%;
+    background-color: var(--css_subBackgroundColor);
+    border-left: 4px solid var(--css_accentColor);
+    left: 0;
+    right: 0;
+    width: auto;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .priceTbl thead th:nth-child(2) p {
+    display: inline-block;
+  }
+
+  .priceTbl thead th:nth-child(2) img {
+    display: none;
+  }
+
+  .priceTbl tbody td {
+    font-size: 14px;
+    padding: 8px 4px;
+    line-height: 1.4em;
+  }
+
+  .priceTbl tbody td span {
+    font-size: 16px;
+    line-height: 1.3em;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    padding-top: 24px;
+    padding-left: 4px;
+    padding-right: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Flow */
+  .stepbar {
+    width: 100%;
+  }
+
+  .stepbar .stepbarwrap .steptitle .stepcircle {
+    width: 4em;
+    height: 4em;
+  }
+
+  .stepbar .stepbarwrap .steptitle .stepcircle span {
+    line-height: 1.9em;
+    font-size: 2em;
+  }
+
+  .stepbar .stepbarwrap .steptitle .title {
+    font-size: 1.3em;
+    line-height: 1.4em;
+  }
+
+  .stepbar .stepbarwrap .steptxt {
+    padding-left: 4.5em;
+  }
+
+  .stepbar .stepbarwrap .stepline {
+    height: calc(100% + 3em);
+    top: 1.5em;
+    left: 1.8em;
+  }
+
+  /* Q&A */
+  .qa h2 {
+    margin-bottom: 50px;
+  }
+
+  .qa ul li.q {
+    font-size: 18px;
+  }
+
+  .qa ul li.a {
+    font-size: 16px;
+  }
+
+  .qa ul li.a span {
+    font-size: 18px;
+  }
+
+  /* CTA Form */
+  .ctaForm__inner {
+    flex-direction: column;
+  }
+
+  .ctaForm__body,
+  .ctaForm__form {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .ctaForm__form {
+    padding-left: 0;
+  }
+
+  .ctaForm__media img {
+    margin: -30px auto 30px;
+    width: 50%;
+    height: auto;
+    display: block;
+  }
+
+  .ctaForm__body p {
+    font-size: 15px;
+    line-height: 1.6em;
+    margin-bottom: 30px;
+  }
+
+  .ctaForm__body p span {
+    font-size: 20px;
+    line-height: 1.8em;
+  }
+
+  .ctaForm__form h2 {
+    font-size: 20px !important;
+    margin: 30px auto 0 !important;
+    padding: 0 !important;
+  }
+
+  .ctaForm__form p {
+    font-size: 15px;
+    line-height: 1.6em;
+    text-align: center;
+  }
+
+  .ctaForm table th {
+    width: 30%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .ctaForm table td {
+    width: 70%;
+    padding: 10px;
+  }
+
+  /* フォーム内の input/textarea/送信ボタンは form-output.css で対応 */
+
+  /* ボタン */
+  .ctaBtn {
+    font-size: 14px;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .ctaBtn span {
+    font-size: 18px;
+  }
+
+  a.btnLink {
+    font-size: 16px;
+    padding: 5px 0 0;
+  }
+
+  /* 会社概要 .company-overview */
+  .company-overview h2 {
+    font-size: 18px !important;
+  }
+
+  .company-overview table {
+    width: 100%;
+  }
+
+  /* Scene */
+  .scene .row-1 {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .scene .row-1 .col-1,
+  .scene .row-1 .col-2 {
+    width: 100%;
+  }
+
+  .scene .row-1 p {
+    font-size: 18px;
+  }
+
+  .scene .scene_row {
+    flex-direction: column;
+  }
+
+  .scene_col {
+    width: 100%;
+  }
+
+  .scene_col .image-container {
+    margin-bottom: 15px;
+  }
+
+  .scene_col li {
+    font-size: 15px;
+  }
+
+  .scene .ib_c-headdig--scesub h3 {
+    font-size: min(3.4vw, 16px);
+  }
+
+  /* Footer Banner */
+  .footer_banner {
+    display: block;
+  }
+
+  .footer_banner .ctaBtn {
+    font-size: 14px;
+    padding: 15px;
+    width: 90%;
+    display: block;
+  }
+
+  .footer_banner .ctaBtn span {
+    font-size: 18px;
+  }
+
+  .footer_banner .btnLink {
+    font-size: 14px;
+  }
+
+  .footer_banner.hide {
+    bottom: -105px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 20px 0 50px;
+  }
+
+  .footer p.sub {
+    margin: 7px auto 0;
+    line-height: 1.8em;
+  }
+
+  p.pagetop {
+    bottom: 150px;
+    margin-left: 85%;
+  }
+
+  /* Content */
+  .content {
+    min-height: calc(100vh - 116px);
+  }
+}
+
+/* ==========================================================================
+   14. メディアクエリ - 特定サイズ対応
+   ========================================================================== */
+
+@media screen and (min-width: 769px) {
+  .fvWrap {
+    min-height: min(52vw, 522px);
+  }
+
+  .fvWrap__body {
+    margin: 50px 0 50px 40px;
+  }
+
+  .fvWrap .imageBox {
+    position: absolute;
+    top: initial;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 40%;
+    transform: initial;
+    float: initial;
+  }
+
+  .fv .textList .tag {
+    width: 85%;
+  }
+
+  .fv .textList .tag.narrow {
+    width: 100%;
+  }
+
+  #performance table.one-column th {
+    width: 80%;
+    display: block;
+    margin: 20px auto;
+  }
+
+  #performance table.one-column td {
+    display: block;
+    width: 100%;
+    padding: 0 13% 30px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .stepbar {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 466px) {
+  .br-sp_s {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .scene .ib_c-headdig--scesub h3 {
+    font-size: min(3.4vw, 16px);
+  }
+
+  .scene_col li {
+    font-size: 14px;
+  }
+
+  .scene_col img {
+    height: 230px;
+  }
+}
+
+/* ==========================================================================
+   15. CTAボタン調整（2行対応・Grid/clampはセクション6で定義）
+   ========================================================================== */
+
+/* ==========================================================================
+   17. スライダー（使用時のみ有効化）
+   ========================================================================== */
+
+.sliderspace {
+  background: var(--bgSecondary);
+}
+
+.sliderspace h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.sliderArea {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.slider {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.slider img {
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+}
+
+.slick__item.slick-center img {
+  opacity: 1;
+}
+
+.slick-prev {
+  left: 8%;
+  z-index: var(--z-above-base);
+}
+
+.slick-next {
+  right: 10%;
+  z-index: var(--z-above-base);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: "slick";
+  font-size: 45px;
+  line-height: 0.6;
+  opacity: 1;
+  color: var(--mediumGray);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-dots {
+  bottom: -60px;
+}
+
+.slick-dots li {
+  width: 35px;
+  height: 2px;
+  margin: 0 3px;
+  background: var(--borderLight);
+}
+
+.slick-dots li button {
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+
+.slick-dots li button::before {
+  display: none;
+}
+
+.slick-dots li.slick-active::before {
+  width: 0;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: var(--darkGray);
+  position: absolute;
+  display: block;
+  content: "";
+  animation: 5s linear 0s infinite alternate slide_meter;
+}
+
+.slick-dots li.slick-active.first::before {
+  animation: 4s linear 0s infinite alternate slide_meter;
+}
+
+@keyframes slide_meter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .sliderspace h2 {
+    font-size: 22px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .slick-prev {
+    left: 4%;
+  }
+
+  .slick-next {
+    right: 10%;
+  }
+}
+
+/* ==========================================================================
+   18. プリファレンス対応
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .fadein.animation-ready {
+    opacity: 0.1;
+    transform: translate(0, 50px);
+    transition: all 500ms;
+  }
+
+  .fadein.animation-ready.scrollin {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* ==========================================================================
+   19. その他のユーティリティ
+   ========================================================================== */
+
+.modal-button {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  text-decoration: none;
+}
+
+.modal-button:active {
+  transform: translateY(2px);
+}
+
+.modal-button:hover {
+  color: var(--css_invertedTextColor);
+  transition: 0.6s;
+}
+
+.main p {
+  text-align: center;
+  margin: 30px auto 0;
+}
+
+/* ヒーロー背景画像設定（padding-top は固定ヘッダー分・lp.css セクション7と lp_base と統一） */
+div.fv {
+  position: relative;
+  padding-top: 78px;
+  width: 100%;
+  overflow: hidden;
+  background: none;
+}
+
+@media screen and (max-width: 768px) {
+  div.fv {
+    padding: 70px 0 50px;
+  }
+}
+
+/* リッチテキストエディタ対応 */
+.scene .rich-heading-align-left {
+  text-align: left !important;
+}
+
+/* CTAフォーム箇条書き（丸バッジチェック・文字色はテーマの反転色） */
+.ctaForm .cta-bullet-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5em;
+}
+.ctaForm .cta-bullet-list li {
+  position: relative;
+  padding-left: 2.75em;
+  margin-bottom: 0.4em;
+  color: var(--css_invertedTextColor);
+  font-weight: normal;
+}
+.ctaForm .cta-bullet-list li:last-child {
+  margin-bottom: 0;
+}
+.ctaForm .cta-bullet-list li::before {
+  position: absolute;
+  left: 0.6em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  font-size: 0.75em;
+  content: "\2713";
+  color: var(--css_invertedTextColor);
+}
+
+/* ロゴ画像 */
+.tblLogo {
+  width: 100%;
+  height: auto;
+}
+
+/* ページトップボタンのホバー効果を維持 */
+p.pagetop a:hover img {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   プレビュー用上書き（エディタ iframe 内: body.editor-preview）
+   ========================================================================== */
+body.editor-preview .content {
+  min-height: auto;
+}
+body.editor-preview .fadein,
+body.editor-preview .fadein.animation-ready,
+body.editor-preview .fadein.animation-ready.scrollin {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+body.editor-preview .siteHeader.fixed {
+  position: sticky;
+}

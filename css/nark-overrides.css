@@ -1,0 +1,101 @@
+/* nARK LP overrides
+   - 活用イメージ: 丸抜きせず横長静止画
+   - 静止画セクション直下に動画サンプル枠
+*/
+
+.performance table th {
+  width: 42%;
+  vertical-align: middle;
+  padding: 20px 24px 20px 20px;
+}
+
+.performance table th img.img-landscape {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.merit__hero table th {
+  width: 42%;
+  vertical-align: top;
+}
+
+.merit__hero table td {
+  width: 58%;
+}
+
+.merit__hero .video-sample {
+  margin-top: 16px;
+  scroll-margin-top: 96px;
+}
+
+.video-sample__label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--css_deepColor);
+  margin: 0 0 8px;
+}
+
+.video-sample__box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-sample__box video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #1a1a1a;
+}
+
+.video-sample__box:not(.is-ready) video {
+  visibility: hidden;
+}
+
+.video-sample__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.video-sample__box.is-ready .video-sample__placeholder {
+  display: none;
+}
+
+@media screen and (min-width: 769px) {
+  #performance table.one-column th img.img-landscape {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .performance table th img.img-landscape {
+    width: 100%;
+    max-width: none;
+  }
+
+  #performance table.one-column th {
+    width: 90%;
+    padding: 20px 16px 8px;
+  }
+
+  .merit__hero .video-sample {
+    margin: 8px 0 24px;
+  }
+}

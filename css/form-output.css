@@ -1,0 +1,349 @@
+/**
+ * 公開フォーム用CSS（LP/Thanks共通）
+ * generateLpFormHtml / generateThanksPageFormHtml で出力されるフォームのスタイルを一元管理。
+ * #contact-form / #thanks-form 内でのみ適用（スコープ化）。
+ * 変数は LP/Thanks 両方で使えるようフォールバック付き。
+ */
+
+:root {
+  --z-layer-1000: 1000;
+}
+
+#contact-form,
+#thanks-form {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* フォームグループ: 1行1項目で縦並び */
+#contact-form .form-group,
+#thanks-form .form-group {
+  display: block;
+  width: 100%;
+  clear: both;
+  margin-bottom: var(--space-xl, 2rem);
+}
+
+#contact-form .form-label,
+#thanks-form .form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: var(--space-sm, 0.5rem);
+  color: var(--color-text-primary, var(--css_baseTextColor, #1a1a1a));
+}
+
+#contact-form .form-label .required,
+#thanks-form .form-label .required {
+  color: var(--color-required-red, #e32);
+  margin-left: var(--space-xs, 0.25rem);
+}
+
+#contact-form .form-input,
+#contact-form .form-textarea,
+#contact-form .form-select,
+#thanks-form .form-input,
+#thanks-form .form-textarea,
+#thanks-form .form-select {
+  display: block;
+  width: 100%;
+  padding: var(--space-md, 1rem);
+  border: 2px solid var(--color-border-light, #c9c9c9);
+  border-radius: var(--radius-md, 0.5rem);
+  font-size: var(--font-size-base, 1rem);
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#contact-form .form-input:focus,
+#contact-form .form-textarea:focus,
+#contact-form .form-select:focus,
+#thanks-form .form-input:focus,
+#thanks-form .form-textarea:focus,
+#thanks-form .form-select:focus {
+  outline: none;
+  border-color: var(--color-accent-blue, #217fc4);
+  box-shadow: 0 0 0 3px rgba(33, 127, 196, 0.1);
+}
+
+#contact-form .form-textarea,
+#thanks-form .form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 送信ボタン（LPテーマ色で統一） */
+#contact-form .form-submit,
+#thanks-form .form-submit {
+  display: block;
+  width: 100%;
+  background: var(--css_ctaButtonColor, var(--css_themeColor, #217fc4));
+  color: var(--color-white, #ffffff);
+  padding: var(--space-lg, 1.5rem) var(--space-3xl, 3rem);
+  border: none;
+  border-radius: var(--radius-full, 9999px);
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#contact-form .form-submit:hover,
+#thanks-form .form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#contact-form .form-submit:focus,
+#contact-form .form-submit:focus-visible,
+#thanks-form .form-submit:focus,
+#thanks-form .form-submit:focus-visible {
+  outline: 2px solid var(--color-accent-blue, #217fc4);
+  outline-offset: 2px;
+}
+
+#contact-form .form-submit:active,
+#thanks-form .form-submit:active {
+  transform: translateY(0);
+}
+
+#contact-form .form-submit:disabled,
+#thanks-form .form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 選択項目（ラジオ）: 1行1項目で表示 */
+#contact-form .form-radio-group,
+#thanks-form .form-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm, 0.5rem);
+}
+
+#contact-form .form-radio-item,
+#thanks-form .form-radio-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+}
+
+#contact-form .form-radio,
+#thanks-form .form-radio {
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#contact-form .form-radio-label,
+#thanks-form .form-radio-label {
+  margin: 0;
+  cursor: pointer;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-text-primary, var(--css_baseTextColor, #1a1a1a));
+}
+
+/* 選択項目（チェックボックス）: 1行1項目で表示 */
+#contact-form .form-checkbox-group,
+#thanks-form .form-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm, 0.5rem);
+}
+
+#contact-form .form-checkbox-item,
+#thanks-form .form-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+}
+
+#contact-form .form-checkbox,
+#thanks-form .form-checkbox {
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#contact-form .form-checkbox-label,
+#thanks-form .form-checkbox-label {
+  margin: 0;
+  cursor: pointer;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-text-primary, var(--css_baseTextColor, #1a1a1a));
+}
+
+/* フォームエラー表示 */
+#contact-form .form-error,
+#thanks-form .form-error {
+  color: var(--color-accent-red, #e32);
+  font-size: var(--font-size-sm, 0.875rem);
+  margin-top: var(--space-xs, 0.25rem);
+  display: block;
+}
+
+#contact-form .form-group.has-error .form-input,
+#contact-form .form-group.has-error .form-textarea,
+#contact-form .form-group.has-error .form-select,
+#thanks-form .form-group.has-error .form-input,
+#thanks-form .form-group.has-error .form-textarea,
+#thanks-form .form-group.has-error .form-select {
+  border-color: var(--color-accent-red, #e32);
+  box-shadow: 0 0 0 3px rgba(238, 51, 34, 0.1);
+}
+
+#contact-form .form-group.has-error .form-label,
+#thanks-form .form-group.has-error .form-label {
+  color: var(--color-accent-red, #e32);
+}
+
+/* 項目別エラーメッセージ（項目17: 細い黒文字で気づきにくい→目立つ赤・太字・アイコン） */
+#contact-form .form-group .error-message,
+#thanks-form .form-group .error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: var(--space-xs, 0.25rem);
+  padding: 0.4em 0.6em;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-accent-red, #e32);
+  background: rgba(238, 51, 34, 0.08);
+  border-left: 3px solid var(--color-accent-red, #e32);
+  border-radius: 3px;
+}
+
+/* エラーメッセージ先頭に警告アイコン（Font Awesome 未読込でも色で気づける） */
+#contact-form .form-group .error-message::before,
+#thanks-form .form-group .error-message::before {
+  content: "\26A0"; /* ⚠ */
+  font-size: 1em;
+  line-height: 1;
+}
+
+/* フォームローディング状態 */
+#contact-form .form-submit.loading,
+#thanks-form .form-submit.loading {
+  position: relative;
+  color: transparent;
+}
+
+#contact-form .form-submit.loading::after,
+#thanks-form .form-submit.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-white, #fff);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: form-output-spin 0.6s linear infinite;
+}
+
+@keyframes form-output-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* レスポンシブ（LP/Thanks共通） */
+@media (max-width: 768px) {
+  #contact-form .form-submit,
+  #thanks-form .form-submit {
+    padding: var(--space-md, 1rem) var(--space-xl, 2rem);
+    font-size: var(--font-size-base, 1rem);
+  }
+
+  #contact-form .form-input:not([type="checkbox"]):not([type="radio"]),
+  #thanks-form .form-input:not([type="checkbox"]):not([type="radio"]) {
+    font-size: 0.875rem;
+  }
+
+  #contact-form .form-textarea,
+  #thanks-form .form-textarea {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #contact-form .form-submit,
+  #thanks-form .form-submit {
+    padding: var(--space-sm, 0.5rem) var(--space-lg, 1.5rem);
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+}
+
+/* プレビュー画面のフォームマスク（LP/Thanks エディタ内プレビュー用・design-system に依存しない） */
+.c-preview-form-wrapper {
+  position: relative;
+  min-height: 200px;
+}
+
+.c-preview-form-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: var(--z-layer-1000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.c-preview-form-mask__notice {
+  pointer-events: auto;
+  max-width: 90%;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #856404;
+  margin-top: 0;
+}
+
+.c-preview-form-mask__notice.form-notice {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+}
+
+.c-preview-form-mask__notice .notice-icon {
+  color: #856404;
+}
+
+.c-preview-form-mask__notice .notice-text {
+  color: #856404;
+}
+
+.c-preview-form-mask__notice .notice-text strong {
+  color: #856404;
+}
+
+/* プレビュー画面のリンク無効化（LP/Thanks エディタ内プレビュー用） */
+body.editor-preview a[href] {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* reCAPTCHA 規約表記（LP/Thanks 共通。バッジ表示時も任意で利用可能） */
+.recaptcha-disclosure {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: #999;
+  margin-top: var(--space-sm, 0.5rem);
+  margin-bottom: 0;
+}
+
+.recaptcha-disclosure a {
+  color: #999;
+  text-decoration: underline;
+  margin: 0;
+}
