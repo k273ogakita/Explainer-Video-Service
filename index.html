@@ -795,7 +795,53 @@
                 <p data-field="footer_cta_form_sub_headline">
                   以下のフォームに必要事項をご入力ください
                 </p>
-                <form action="mailto:nark.visual.media@gmail.com" method="post" enctype="text/plain" id="contact-form" novalidate><div class="form-group" id="form_company_name_group" data-field-key="form_company_name" data-field-type="text" data-required="1"><label for="form_company_name" class="form-label" data-field="form_company_name">医院名 <span class="required">*</span></label><input type="text" id="form_company_name" name="form_company_name" class="form-input" maxlength="255" placeholder="例: ご記入ください" required></div><div class="form-group" id="form_email_group" data-field-key="form_email" data-field-type="email" data-required="1"><label for="form_email" class="form-label" data-field="form_email">メールアドレス <span class="required">*</span></label><input type="email" id="form_email" name="form_email" class="form-input" maxlength="254" placeholder="例: email@example.com" required></div><div class="form-group" id="form_contact_name_group" data-field-key="form_contact_name" data-field-type="text" data-required="1"><label for="form_contact_name" class="form-label" data-field="form_contact_name">ご担当者名 <span class="required">*</span></label><input type="text" id="form_contact_name" name="form_contact_name" class="form-input" maxlength="255" placeholder="例: ご記入ください" required></div><div class="form-group" id="form_phone_group" data-field-key="form_phone" data-field-type="tel"><label for="form_phone" class="form-label" data-field="form_phone">電話番号</label><input type="tel" id="form_phone" name="form_phone" class="form-input" maxlength="32" placeholder="例: 03-1234-5678"></div><div class="form-group" id="form_inquiry_group" data-field-key="form_inquiry" data-field-type="textarea"><label for="form_inquiry" class="form-label" data-field="form_inquiry">お問い合わせ内容(サンプルと費用感が知りたいなどでも結構です)</label><textarea id="form_inquiry" name="form_inquiry" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea></div><div class="form-group" id="form_field6_group" data-field-key="form_field6" data-field-type="text"><label for="form_field6" class="form-label" data-field="form_field6">どのような制作をご検討中の動画ですか？</label><input type="text" id="form_field6" name="form_field6" class="form-input" maxlength="255" placeholder="例: ご記入ください"></div><div class="form-group" id="form_field8_group" data-field-key="form_field8" data-field-type="textarea"><label for="form_field8" class="form-label" data-field="form_field8">ご予算・希望納期</label><textarea id="form_field8" name="form_field8" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea></div><div class="form-group" id="form_field9_group" data-field-key="form_field9" data-field-type="textarea"><label for="form_field9" class="form-label" data-field="form_field9">その他（自由記述）</label><textarea id="form_field9" name="form_field9" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea></div><div class="form-group" id="form_field10_group" data-field-key="form_field10" data-field-type="textarea"><label for="form_field10" class="form-label" data-field="form_field10">備考</label><textarea id="form_field10" name="form_field10" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea></div><div class="form-group"><button type="submit" id="submit-button" class="form-submit" data-field="footer_cta_form_button_text">サンプル・費用感がわかる資料を希望する</button></div></form>
+                <form action="https://formsubmit.co/nark.visual.media@gmail.com" method="POST" id="contact-form">
+                  <input type="hidden" name="_subject" value="【nARK LP】患者説明動画のお問い合わせ">
+                  <input type="hidden" name="_template" value="table">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="https://lp.btobservice.com/bc81a18c6f50c43ad026a3113ee55607/thanks.html">
+                  <input type="hidden" name="_autoresponse" value="nARKです。お問い合わせありがとうございます。内容を確認のうえ、折り返しご連絡いたします。">
+                  <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off">
+                  <div class="form-group" id="form_company_name_group">
+                    <label for="form_company_name" class="form-label">医院名 <span class="required">*</span></label>
+                    <input type="text" id="form_company_name" name="医院名" class="form-input" maxlength="255" placeholder="例: ご記入ください" required>
+                  </div>
+                  <div class="form-group" id="form_email_group">
+                    <label for="form_email" class="form-label">メールアドレス <span class="required">*</span></label>
+                    <input type="email" id="form_email" name="email" class="form-input" maxlength="254" placeholder="例: email@example.com" required>
+                  </div>
+                  <div class="form-group" id="form_contact_name_group">
+                    <label for="form_contact_name" class="form-label">ご担当者名 <span class="required">*</span></label>
+                    <input type="text" id="form_contact_name" name="ご担当者名" class="form-input" maxlength="255" placeholder="例: ご記入ください" required>
+                  </div>
+                  <div class="form-group" id="form_phone_group">
+                    <label for="form_phone" class="form-label">電話番号</label>
+                    <input type="tel" id="form_phone" name="電話番号" class="form-input" maxlength="32" placeholder="例: 03-1234-5678">
+                  </div>
+                  <div class="form-group" id="form_inquiry_group">
+                    <label for="form_inquiry" class="form-label">お問い合わせ内容(サンプルと費用感が知りたいなどでも結構です)</label>
+                    <textarea id="form_inquiry" name="お問い合わせ内容" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea>
+                  </div>
+                  <div class="form-group" id="form_field6_group">
+                    <label for="form_field6" class="form-label">どのような制作をご検討中の動画ですか？</label>
+                    <input type="text" id="form_field6" name="検討中の動画" class="form-input" maxlength="255" placeholder="例: ご記入ください">
+                  </div>
+                  <div class="form-group" id="form_field8_group">
+                    <label for="form_field8" class="form-label">ご予算・希望納期</label>
+                    <textarea id="form_field8" name="ご予算・希望納期" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea>
+                  </div>
+                  <div class="form-group" id="form_field9_group">
+                    <label for="form_field9" class="form-label">その他（自由記述）</label>
+                    <textarea id="form_field9" name="その他" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea>
+                  </div>
+                  <div class="form-group" id="form_field10_group">
+                    <label for="form_field10" class="form-label">備考</label>
+                    <textarea id="form_field10" name="備考" class="form-textarea" rows="5" maxlength="2000" placeholder="例: お問い合わせ内容をご記入ください"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" id="submit-button" class="form-submit">サンプル・費用感がわかる資料を希望する</button>
+                  </div>
+                </form>
               </div>
               <!----------------------------------- /フォーム ----------------------------------->
             </div>
@@ -892,16 +938,9 @@
         }
         var form = document.getElementById("contact-form");
         if (form) {
-          form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            var fd = new FormData(form);
-            var lines = ["nARK 患者説明動画LPからのお問い合わせ", ""];
-            fd.forEach(function (v, k) {
-              if (String(v).trim()) lines.push(k + ": " + v);
-            });
-            var subject = encodeURIComponent("患者説明動画のお問い合わせ");
-            var body = encodeURIComponent(lines.join("\n"));
-            window.location.href = "mailto:nark.visual.media@gmail.com?subject=" + subject + "&body=" + body;
+          form.addEventListener("submit", function () {
+            var btn = document.getElementById("submit-button");
+            if (btn && form.checkValidity()) btn.classList.add("loading");
           });
         }
       })();
