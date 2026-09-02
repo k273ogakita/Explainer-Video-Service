@@ -122,13 +122,6 @@
   min-width: 280px;
 }
 
-#contact-form .hp-field {
-  position: absolute;
-  left: -9999px;
-  height: 0;
-  overflow: hidden;
-}
-
 @media screen and (max-width: 768px) {
   .thanks__box {
     margin: 24px 16px;
