@@ -373,16 +373,6 @@
               <tr>
                 <th>
                   <img src="./images/merit_image_path.jpg" loading="lazy" alt="看護師が作る伝わる患者説明動画制作" data-src-field="merit_image_path" width="600" height="510">
-                  <div class="video-sample" id="video-sample">
-                    <p class="video-sample__label">動画サンプル</p>
-                    <div class="video-sample__box" id="videoSampleBox">
-                      <!-- サンプル動画を入れるとき: images/sample.mp4 を置き、下の source コメントを外す -->
-                      <video id="sampleVideo" controls playsinline poster="./images/merit_image_path.jpg">
-                        <!-- <source src="./images/sample.mp4" type="video/mp4"> -->
-                      </video>
-                      <p class="video-sample__placeholder">動画サンプルをここに配置します</p>
-                    </div>
-                  </div>
                 </th>
                 <td>
                   <h2 data-field="service_mid_headline">
@@ -395,6 +385,24 @@
                 </td>
               </tr>
             </table>
+          </div>
+          <div class="video-samples" id="video-sample">
+            <p class="video-samples__heading">動画サンプル</p>
+            <div class="video-samples__grid">
+              <figure class="video-sample">
+                <figcaption class="video-sample__label">待合室モニター（内科）</figcaption>
+                <div class="video-sample__box">
+                  <iframe src="https://www.youtube-nocookie.com/embed/qd6fd1SwAnw?rel=0&modestbranding=1" title="待合室モニター（内科）" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <p class="video-sample__note">※サンプルのため、再生時間を短くしています。この内容で院内モニターで実際に流す動画は、およそ5分になります。</p>
+              </figure>
+              <figure class="video-sample">
+                <figcaption class="video-sample__label">白内障手術の説明動画</figcaption>
+                <div class="video-sample__box">
+                  <iframe src="https://www.youtube-nocookie.com/embed/-0gH2IZZUt8?rel=0&modestbranding=1" title="白内障手術の説明動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                </div>
+              </figure>
+            </div>
           </div>
           <ul class="merit__list">
             <li id="merit-card-1" class="merit__item fadein">
@@ -926,16 +934,6 @@
 
     <script>
       (function () {
-        var video = document.getElementById("sampleVideo");
-        var box = document.getElementById("videoSampleBox");
-        if (video && box) {
-          video.addEventListener("loadeddata", function () {
-            if (video.readyState >= 2 && video.videoWidth) {
-              box.classList.add("is-ready");
-            }
-          });
-          video.addEventListener("error", function () { /* keep placeholder */ }, true);
-        }
         var form = document.getElementById("contact-form");
         if (form) {
           form.addEventListener("submit", function () {
